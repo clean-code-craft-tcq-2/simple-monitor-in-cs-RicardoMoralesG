@@ -3,7 +3,8 @@ using System.Diagnostics;
 
 class Checker
 {
-    static bool batteryIsOk(float temperature, float soc, float chargeRate) {
+    static bool batteryIsOk(float temperature, float soc, float chargeRate)
+    {
         //if(temperature < 0 || temperature > 45) {
         //    Console.WriteLine("Temperature is out of range!");
         //    return false;
@@ -16,22 +17,27 @@ class Checker
         //}
 
         return rangeIsOK(0f, 45f, temperature) && rangeIsOK(20f, 80f, soc) && temperatureUnderLimit(0.8f, chargeRate);
-        return true;
+        // return true;
     }
 
-    static void ExpectTrue(bool expression) {
-        if(!expression) {
+    static void ExpectTrue(bool expression)
+    {
+        if (!expression)
+        {
             Console.WriteLine("Expected true, but got false");
             Environment.Exit(1);
         }
     }
-    static void ExpectFalse(bool expression) {
-        if(expression) {
+    static void ExpectFalse(bool expression)
+    {
+        if (expression)
+        {
             Console.WriteLine("Expected false, but got true");
             Environment.Exit(1);
         }
     }
-    static int Main() {
+    static int Main()
+    {
         ExpectTrue(batteryIsOk(25, 70, 0.7f));
         ExpectFalse(batteryIsOk(50, 85, 0.0f));
         Console.WriteLine("All ok");
@@ -42,8 +48,9 @@ class Checker
         Debug.Assert(rangeIsOK(0f, 45f, 0f) == false);
         Debug.Assert(rangeIsOK(0f, 45f, 46f) == false);
 
-       
-              
+
+
+
 
         return 0;
     }
@@ -52,7 +59,7 @@ class Checker
     static bool rangeIsOK(float MIN, float MAX, float Value)
     {
 
-        if (Value <= MIN || Value => MAX)
+        if (Value == MIN || Value == MAX)
         {
 
             return false;
@@ -65,7 +72,7 @@ class Checker
     static bool temperatureUnderLimit(float temperatureLimit, float Value)
     {
 
-        if (Value => temperatureLimit)
+        if (Value == temperatureLimit)
         {
 
             return false;
