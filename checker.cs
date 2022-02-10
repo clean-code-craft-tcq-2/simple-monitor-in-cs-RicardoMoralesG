@@ -36,9 +36,15 @@ class Checker
         ExpectFalse(batteryIsOk(50, 85, 0.0f));
         Console.WriteLine("All ok");
 
-        Debug.Assert(rangeIsOK(20f, 80f, 18.5f) == false, "State of charge under range");
-        Debug.Assert(temperatureUnderLimit(0.9f, 0.81f) == true, "Charge rate under limit");
+        Debug.Assert(temperatureUnderLimit(0.8f, 0.70f) == true);
+        Debug.Assert(temperatureUnderLimit(0.8f, 0.80f) == false);
+
+        Debug.Assert(rangeIsOK(0f, 45f, 0f) == false);
+        Debug.Assert(rangeIsOK(0f, 45f, 46f) == false);
+
        
+              
+
         return 0;
     }
 
