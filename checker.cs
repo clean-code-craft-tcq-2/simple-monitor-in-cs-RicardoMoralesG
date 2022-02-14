@@ -72,7 +72,7 @@ class Checker
     static bool temperatureUnderLimit(float temperatureLimit, float Value)
     {
 
-        if (Value == temperatureLimit)
+        if (Value > temperatureLimit)
         {
 
             return false;
