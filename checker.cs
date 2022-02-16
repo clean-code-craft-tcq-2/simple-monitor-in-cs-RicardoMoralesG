@@ -47,7 +47,7 @@ class Checker
     static bool rangeIsOK(float MIN, float MAX, float Value)
     {
 
-        if (Value == MIN || Value == MAX)
+        if (Value <= MIN || Value >= MAX)
         {
 
             return false;
