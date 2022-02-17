@@ -58,46 +58,39 @@ class Checker
         return 0;
     }
 
-
     static bool rangeIsOK(float MIN, float MAX, float Value)
     {
 
-        if (Value <= MIN || Value >= MAX)
+        var tolerance = MAX * TOLERANCE_IN_PERCENTAGE;
+
+        var temperatureUpper = MAX - tolerance;
+
+        var lowertemperatureLimit = MIN + tolerance;
+
+        if (Value <= lowertemperatureLimit || Value >= temperatureUpper)
         {
 
-            acceptableRisks(MIN, MAX, Value);
+            PrintAlert();
+
             return false;
         }
-
-        return true;
+        else
+        {
+            return true;
+        }
 
     }
 
     static bool temperatureUnderLimit(float temperatureLimit, float Value)
     {
+        var tolerance = temperatureLimit * TOLERANCE_IN_PERCENTAGE;
 
-        if (Value >= temperatureLimit)
+        var temperatureUpper = temperatureLimit - tolerance;
+
+        if (Value >= temperatureUpper)
         {
+            PrintAlert();
 
-            unacceptableRisks(temperatureLimit, Value);
-            return false;
-        }
-
-        return true;
-
-    }
-
-    static bool acceptableRisks(float minTemperature, float maxTemperature, float temperatureValue)
-    {
-        var tolerance = maxTemperature * TOLERANCE_IN_PERCENTAGE;
-
-        var temperatureUpper = maxTemperature - tolerance;
-
-        var lowertemperatureLimit = minTemperature + tolerance;
-
-        if (temperatureValue <= lowertemperatureLimit || temperatureValue >= temperatureUpper)
-        {
-            Console.WriteLine("Alert: Please Check Battery Level");
 
             return false;
         }
@@ -109,22 +102,15 @@ class Checker
     }
 
 
-    static bool unacceptableRisks(float maxTemperature, float temperatureValue)
+    public static string PrintAlert()
     {
-        var tolerance = maxTemperature * TOLERANCE_IN_PERCENTAGE;
 
-        var temperatureUpper = maxTemperature - tolerance;
 
-        if (temperatureValue >= temperatureUpper)
-        {
-            Console.WriteLine("Alert: Please Check Battery Level");
+        string alert = "Alert: Please Check Battery Level";
+        Console.WriteLine(string.Format("{0}", alert));
 
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return alert;
+
 
     }
 }
